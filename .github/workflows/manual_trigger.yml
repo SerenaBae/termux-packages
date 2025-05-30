@@ -1,7 +1,7 @@
 name: Manual Bootstrap Build
 
 on:
-  workflow_dispatch:  # Manual trigger via GitHub UI
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,10 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Debug list files
+        run: |
+          ls -al
+          echo "In scripts folder:"
+          ls -al scripts || echo "scripts folder not found"
 
-      - name: Give scripts execute permission
+      - name: Set script permissions
         run: chmod +x ./scripts/build-bootstrap.sh ./scripts/run-docker.sh
 
       - name: Run Bootstrap and Docker scripts
