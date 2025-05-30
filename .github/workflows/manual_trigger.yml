@@ -13,10 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Patch termux_step_handle_buildarch.sh
+        run: |
+          sed -i '/\/data\/TERMUX_ARCH/d' scripts/build/termux_step_handle_buildarch.sh
+
       - name: Set script permissions
         run: chmod +x ./scripts/build-bootstraps.sh ./scripts/run-docker.sh
 
       - name: Run Bootstrap and Docker scripts
         run: |
+          export TERMUX_ARCH=aarch64
           ./scripts/build-bootstraps.sh
           ./scripts/run-docker.sh
+          
