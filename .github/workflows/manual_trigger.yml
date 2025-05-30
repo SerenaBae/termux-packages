@@ -11,16 +11,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Debug list files
-        run: |
-          ls -al
-          echo "In scripts folder:"
-          ls -al scripts || echo "scripts folder not found"
-
       - name: Set script permissions
-        run: chmod +x ./scripts/build-bootstrap.sh ./scripts/run-docker.sh
+        run: chmod +x ./scripts/build-bootstraps.sh ./scripts/run-docker.sh
 
       - name: Run Bootstrap and Docker scripts
         run: |
-          ./scripts/build-bootstrap.sh
+          ./scripts/build-bootstraps.sh
           ./scripts/run-docker.sh
