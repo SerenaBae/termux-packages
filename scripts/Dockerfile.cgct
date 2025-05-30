@@ -8,6 +8,7 @@
 # scripts/setup-{ubuntu,android-sdk,cgct}.sh setup scripts.
 FROM ghcr.io/termux/package-builder
 COPY scripts/setup-cgct.sh /tmp/termux-packages/scripts/setup-cgct.sh
+RUN ls -l /tmp
 # RUN TERMUX_PKGS__BUILD__IS_DOCKER_BUILD='true' /tmp/termux-packages/scripts/setup-cgct.sh
 RUN chmod +x /tmp/termux-packages/termux-packages/setup-cgct.sh \
  && bash -x /tmp/termux-packages/termux-packages/setup-cgct.sh
