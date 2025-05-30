@@ -15,6 +15,8 @@ jobs:
         run: chmod +x ./scripts/build-bootstraps.sh ./scripts/run-docker.sh
 
       - name: Run Bootstrap and Docker scripts
+        env:
+          TERMUX_ARCH: aarch64
         run: |
           ./scripts/build-bootstraps.sh
           ./scripts/run-docker.sh
