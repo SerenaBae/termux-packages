@@ -6,7 +6,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      TERMUX_ARCH: aarch64
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -15,8 +17,6 @@ jobs:
         run: chmod +x ./scripts/build-bootstraps.sh ./scripts/run-docker.sh
 
       - name: Run Bootstrap and Docker scripts
-        env:
-          TERMUX_ARCH: aarch64
         run: |
           ./scripts/build-bootstraps.sh
           ./scripts/run-docker.sh
