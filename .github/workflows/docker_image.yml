@@ -26,10 +26,9 @@ jobs:
       uses: actions/checkout@v4
     - name: Build
       run: |
-        cd ./scripts
-        docker build --tag termux/package-builder:latest .
+        docker build --tag termux/package-builder:latest -f scripts/Dockerfile ./scripts
         docker tag termux/package-builder:latest ghcr.io/termux/package-builder:latest
-        docker build --tag termux/package-builder-cgct:latest --file Dockerfile.cgct .
+        docker build --tag termux/package-builder-cgct:latest -f scripts/Dockerfile.cgct .
         docker tag termux/package-builder-cgct:latest ghcr.io/termux/package-builder-cgct:latest
     - name: Login to GHCR
       if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request' && github.repository == 'SerenaBae/termux-packages'
