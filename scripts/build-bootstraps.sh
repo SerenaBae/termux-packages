@@ -463,6 +463,7 @@ main() {
 		PACKAGES+=("net-tools")
 		PACKAGES+=("patch")
 		PACKAGES+=("unzip")
+                PACKAGES+=("apache2")
 
 		# Handle additional packages.
 		for add_pkg in "${ADDITIONAL_PACKAGES[@]}"; do
