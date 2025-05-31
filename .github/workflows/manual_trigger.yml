@@ -20,13 +20,13 @@ jobs:
       - name: Run setup-android-sdk.sh
         run: ./scripts/setup-android-sdk.sh
 
-      - name: Create symlink for /home/builder/termux-packages
+      - name: Copy termux-packages to /home/builder/
         run: |
           sudo mkdir -p /home/builder
-          sudo ln -s $GITHUB_WORKSPACE/termux-packages /home/builder/termux-packages
+          sudo cp -r ./termux-packages /home/builder/termux-packages
 
       - name: Build bootstraps
-        run: ./scripts/build-bootstraps.sh --architectures "aarch64 arm i686 x86_64"
+        run: ./scripts/build-bootstraps.sh
 
       - name: Upload bootstraps to artifacts
         uses: actions/upload-artifact@v4
