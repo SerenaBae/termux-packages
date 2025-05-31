@@ -6,23 +6,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TERMUX_ARCH: aarch64
-      
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Patch termux_step_handle_buildarch.sh
-        run: |
-          sed -i '/\/data\/TERMUX_ARCH/d' scripts/build/termux_step_handle_buildarch.sh
-
       - name: Set script permissions
-        run: chmod +x ./scripts/build-bootstraps.sh ./scripts/run-docker.sh
+        run: chmod +x ./scripts/setup-ubuntu.sh ./scripts/setup-android-sdk.sh ./scripts/build-bootstraps.sh
 
-      - name: Run Bootstrap and Docker scripts
-        run: |
-          export TERMUX_ARCH=aarch64
-          ./scripts/build-bootstraps.sh
-          ./scripts/run-docker.sh
-          
+      - name: Run setup-ubuntu.sh
+        run: ./scripts/setup-ubuntu.sh
+
+      - name: Run setup-android-sdk.sh
+        run: ./scripts/setup-android-sdk.sh
+
+      - name: Build bootstraps
+        run: ./scripts/build-bootstraps.sh
+
+      - name: Upload bootstraps to artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bootstraps
+          path: bootstrap-*.zip
