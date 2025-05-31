@@ -87,6 +87,10 @@ build_package() {
 			echo "Ignoring error 'No build.sh script at package dir'" 1>&2
 			return 0
 		fi
+                if [[ $IGNORE_BUILD_SCRIPT_NOT_FOUND_ERROR == "1" ]] && [[ "$build_output" == *"No build.sh script at package dir"* || "$build_output" == *"No package"*"found"* || "$build_output" == *"not found"* ]]; then
+                    echo "Ignoring package/build error: package not available" 1>&2
+                    return 0
+                fi
 	fi
 
 	return $return_value
